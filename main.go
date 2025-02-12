@@ -1,21 +1,18 @@
 package main
 
-import (
-  "fmt"
-)
+import "golang.org/x/tour/pic"
 
-//TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
-// the <icon src="AllIcons.Actions.Execute"/> icon in the gutter and select the <b>Run</b> menu item from here.</p>
+func Pic(dx, dy int) [][]uint8 {
+	image := make([][]uint8, dy)
+	for s := range image {
+		image[s] = make([]uint8, dx)
+		for e := range image[s] {
+			image[s][e] = uint8(s * e) // Mathematical function: s * e
+		}
+	}
+	return image
+}
 
 func main() {
-  //TIP <p>Press <shortcut actionId="ShowIntentionActions"/> when your caret is at the underlined text
-  // to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
-  s := "gopher"
-  fmt.Println("Hello and welcome, %s!", s)
-
-  for i := 1; i <= 5; i++ {
-	//TIP <p>To start your debugging session, right-click your code in the editor and select the Debug option.</p> <p>We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-	// for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.</p>
-	fmt.Println("i =", 100/i)
-  }
+	pic.Show(Pic)
 }
