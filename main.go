@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
@@ -46,6 +47,28 @@ func createImage(dx, dy int, filename string) {
 	}
 }
 
+// ------------------------------------------------
+// Fibonacci Sequence Implementation
+// ------------------------------------------------
+// The Fibonacci sequence is a series of numbers where each number is the sum
+// of the two preceding ones, typically starting with 0 and 1.
+// This implementation provides a generator function to compute the sequence.
+//
+// Note: Be cautious about sequential and simultaneous permutations in the code.
+// Sequential assignments can lead to logical errors when updating values,
+// as demonstrated in the commented lines below.
+func fibbo() func() int {
+	prec := 0
+	next := 1
+	return func() int {
+		result := prec
+		// prec = next  // this code is different from the one below it
+		// next = prec + next // this is sequential
+		prec, next = next, prec+next
+		return result
+	}
+}
+
 func main() {
 	// Define the image size
 	dx, dy := 256, 256
@@ -53,4 +76,13 @@ func main() {
 	// Create and save the image
 	createImage(dx, dy, "output.png")
 	println("Image generated and saved to output.png")
+
+	// ------------------------------------------------
+	// Fibonacci Sequence Implementation
+	// ------------------------------------------------
+	fib := fibbo()
+	for i := 0; i < 10; i++ {
+		fmt.Println(fib())
+	}
+
 }
